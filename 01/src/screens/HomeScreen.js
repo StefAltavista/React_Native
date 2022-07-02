@@ -51,6 +51,18 @@ const HomeScreen = (props) => {
                     props.navigation.navigate("Square");
                 }}
             />
+            <Button
+                title="Go to Text Demo"
+                onPress={() => {
+                    props.navigation.navigate("Text");
+                }}
+            />
+            <Button
+                title="Go to Box Demo"
+                onPress={() => {
+                    props.navigation.navigate("Box");
+                }}
+            />
             {/* <TouchableOpacity
                 onPress={() => {
                     props.navigation.navigate("List");
