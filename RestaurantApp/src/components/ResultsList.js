@@ -1,8 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity,
+} from "react-native";
 import ResultDetail from "./ResultDetail";
+import { withNavigation } from "react-navigation";
 
-export default function ResultsList({ title, list }) {
+export default withNavigation(function ResultsList({
+    title,
+    list,
+    navigation,
+}) {
+    if (!list.length) {
+        return null;
+    }
     return (
         <View>
             <Text style={styles.title}>{title}</Text>
@@ -12,12 +26,20 @@ export default function ResultsList({ title, list }) {
                 data={list}
                 keyExtractor={(list) => list.id}
                 renderItem={({ item }) => {
-                    return <ResultDetail result={item} />;
+                    return (
+                        <TouchableOpacity
+                            onPress={() =>
+                                navigation.navigate("Result", { id: item.id })
+                            }
+                        >
+                            <ResultDetail result={item} />
+                        </TouchableOpacity>
+                    );
                 }}
             />
         </View>
     );
-}
+});
 const styles = StyleSheet.create({
     title: {
         fontSize: 18,
