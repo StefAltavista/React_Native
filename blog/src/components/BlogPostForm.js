@@ -4,7 +4,6 @@ import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 export default function BlogPostForm({ onSubmit, initialValues }) {
     const [title, setTitle] = useState(initialValues.title);
     const [content, setContent] = useState(initialValues.content);
-    const id = initialValues.id;
 
     return (
         <View>
@@ -23,7 +22,7 @@ export default function BlogPostForm({ onSubmit, initialValues }) {
             <Button
                 title="Save Blog Post"
                 onPress={() => {
-                    onSubmit(id, title, content);
+                    onSubmit(title, content);
                 }}
             />
         </View>

@@ -12,18 +12,19 @@ import { Feather } from "@expo/vector-icons";
 
 export default function IndexScreen({ navigation }) {
     const { state, deleteBlogPost } = useContext(Context);
+    console.log(state, state);
 
     return (
         <View>
             <FlatList
                 data={state}
-                keyExtractor={(state) => state.title}
                 renderItem={({ item }) => {
                     return (
                         <TouchableOpacity
                             onPress={() =>
                                 navigation.navigate("Show", { id: item.id })
                             }
+                            key={item.id}
                         >
                             <View style={styles.row}>
                                 <Text style={styles.title}>{item.title}</Text>

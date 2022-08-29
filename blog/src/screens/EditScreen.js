@@ -12,8 +12,10 @@ export default function ({ navigation }) {
 
     return (
         <BlogPostForm
-            initialValues={{ title: post.title, content: post.content, id }}
-            onSubmit={(title, content) => editBlogPost(id, title, content)}
+            initialValues={{ title: post.title, content: post.content }}
+            onSubmit={(title, content) =>
+                editBlogPost(id, title, content, () => navigation.pop())
+            }
         />
     );
 }
