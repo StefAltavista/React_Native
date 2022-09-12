@@ -9,10 +9,12 @@ const router = express.Router();
 const key = "My_Secret_Key";
 
 router.post("/signup", async (req, res) => {
+    console.log("signup");
     const { email, password } = req.body;
 
     try {
         const user = new User({ email, password });
+
         await user.save();
         const token = jwt.sign({ userId: user._id }, key);
         res.send({ token });
@@ -34,13 +36,13 @@ router.post("/signin", async (req, res) => {
         return res.status(422).send({ error: "Invalid password or email" });
     }
 
-    try {
-        await user.comparePassword(password);
-        const token = jwt.sign({ userId: user.id }, key);
-        res.send({ token });
-    } catch (err) {
-        return res.status(422).send({ error: "Invalid password or email" });
-    }
+    //try {
+    await user.comparePassword(password);
+    const token = jwt.sign({ userId: user.id }, key);
+    res.send({ token });
+    // } catch (err) {
+    //     return res.status(422).send({ error: "Invalid password or email" });
+    // }
 });
 
 module.exports = router;
